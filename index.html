@@ -1,40 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Aayush Bhusari | Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<header>
-    <h1>Aayush Bhusari</h1>
-    <p>MS ITM @ UTD | Data • Software • ML</p>
-</header>
+    <!-- Animated Background -->
+    <div class="background-animation"></div>
 
-<section>
-    <h2>About</h2>
-    <p>
-        Graduate student in Information Technology and Management with an interest
-        in building data-driven systems and practical software solutions.
-    </p>
-</section>
+    <main class="container">
 
-<section>
-    <h2>Projects</h2>
-    <p>Projects will be added here.</p>
-</section>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-text">
+                <h1>Aayush Bhusari</h1>
+                <p class="tagline">Data Analysis · Machine Learning · Applied Analytics</p>
 
-<section>
-    <h2>Contact</h2>
-    <p>Email: aayush.bhusari@utdallas.edu</p>
-    <p>
-        <a href="https://github.com/aayushbhusari">GitHub</a> |
-        <a href="https://www.linkedin.com/in/aayush-bhusari-">LinkedIn</a>
-    </p>
-</section>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/aayush-bhusari-/" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:aayush.bhusari@utdallas.edu" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="profile-photo">
+                <img src="assets/profile.jpg" alt="Aayush Bhusari"/>
+            </div>
+        </header>
+
+        <!-- Summary Section -->
+        <section class="section">
+            <h2>Summary</h2>
+            <p>
+                I am a Master’s student in Information Technology and Management at The University of Texas at Dallas,
+                with a strong foundation in data analysis, machine learning, and applied analytics. My background
+                spans working with structured and unstructured data, building end-to-end analytical pipelines,
+                and applying statistical and machine learning techniques to real-world problems.
+            </p>
+            <p>
+                I have hands-on experience with Python, SQL, data visualization tools, and core machine learning
+                libraries, and I am particularly interested in using data-driven approaches to support decision-making
+                in technology-focused and analytics-driven environments.
+            </p>
+        </section>
+
+        <!-- Projects Section (Empty for now) -->
+        <section class="section">
+            <h2>Projects</h2>
+            <p class="muted-text">
+                Projects will be added here soon.
+            </p>
+        </section>
+
+    </main>
 
 </body>
 </html>
-
