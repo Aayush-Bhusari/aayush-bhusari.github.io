@@ -1,149 +1,149 @@
 :root {
-    --bg-dark: #0a0a0a;
-    --card-bg: #161616;
-    --accent: #64ffda; /* Clean teal accent */
-    --text-main: #e6f1ff;
-    --text-dim: #8892b0;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    --black: #000000;
+    --gray-dark: #111111;
+    --gray-light: #888888;
+    --accent: #ffffff;
+    --font-main: 'Inter', sans-serif;
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    font-family: 'Inter', sans-serif;
+    background-color: var(--black);
+    color: white;
+    font-family: var(--font-main);
+    margin: 0;
     line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* Minimal Background Animation */
-.bg-animation {
+/* Minimal background animation */
+.bg-glow {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%, #112240 0%, #0a192f 100%);
+    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
     z-index: -1;
-    animation: pulse 10s ease-in-out infinite alternate;
+    animation: pulse 8s infinite alternate;
 }
 
 @keyframes pulse {
-    0% { opacity: 0.6; }
-    100% { opacity: 1; }
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
 }
 
 .container {
-    max-width: 900px;
+    max-width: 850px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 2rem;
 }
 
-/* Navigation */
+/* Nav */
 nav {
     padding: 2rem 0;
 }
 
-nav .container {
+.nav-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    font-weight: 600;
-    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    font-size: 1.2rem;
+}
+
+.nav-link {
+    color: var(--gray-light);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
     color: var(--accent);
 }
 
-.btn-social {
-    text-decoration: none;
-    color: var(--text-main);
-    margin-left: 20px;
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    border: 1px solid var(--accent);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.btn-social:hover {
-    background: rgba(100, 255, 218, 0.1);
-}
-
-/* Hero Section */
+/* Hero */
 .hero {
-    padding: 60px 0;
-    text-align: center;
+    padding: 4rem 0;
+    text-align: left;
 }
 
 .profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border: 3px solid var(--accent);
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    filter: grayscale(100%);
+    border: 1px solid #333;
 }
 
 h1 {
     font-size: 3rem;
-    margin-bottom: 20px;
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -2px;
 }
 
 .summary {
-    font-size: 1.1rem;
-    color: var(--text-dim);
-    max-width: 700px;
-    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--gray-light);
+    font-weight: 300;
 }
 
-/* Skills Section */
-.skills-section {
-    padding: 80px 0;
+.summary strong {
+    color: white;
+    font-weight: 400;
 }
 
-h2 {
-    margin-bottom: 40px;
-    border-bottom: 1px solid #333;
-    display: inline-block;
-    padding-bottom: 10px;
-}
-
-.skills-grid {
+/* Skills Grid */
+.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 4rem 0;
 }
 
-.skill-category h3 {
-    color: var(--accent);
-    margin-bottom: 10px;
-    font-size: 1rem;
+.skill-card {
+    border-top: 1px solid #222;
+    padding-top: 1rem;
 }
 
-.skill-category p {
-    color: var(--text-dim);
+.skill-card h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gray-light);
+    margin-bottom: 0.5rem;
 }
 
-/* Projects Section (Placeholder) */
-.projects-section {
-    padding: 80px 0;
-    min-height: 300px;
+/* Projects */
+.projects {
+    padding: 4rem 0;
 }
 
-.placeholder-text {
+.empty-state {
+    color: #333;
     font-style: italic;
-    color: #444;
+    border: 1px dashed #222;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 8px;
 }
 
 footer {
+    padding: 4rem 0;
+    border-top: 1px solid #111;
     text-align: center;
-    padding: 40px 0;
-    color: var(--text-dim);
+    color: #444;
     font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2.2rem; }
+    .grid { grid-template-columns: 1fr; }
 }
