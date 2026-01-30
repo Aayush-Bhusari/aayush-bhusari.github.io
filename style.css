@@ -3,9 +3,8 @@
     --fg: #ffffff;
     --gray: #9ca3af;
     --border: #333333;
-    --accent: #60a5fa; /* Subtle blue for hover */
-    /* Geometric Sans Serif Font */
-    --font-stack: 'Space Grotesk', sans-serif; 
+    --accent: #60a5fa;
+    --font-stack: 'Space Grotesk', sans-serif;
 }
 
 * {
@@ -24,7 +23,6 @@ body {
 }
 
 /* --- STAR ANIMATION START --- */
-/* This creates small white shadows that look like stars and animates them upward */
 #stars, #stars2, #stars3 {
     position: fixed;
     top: 0;
@@ -80,35 +78,34 @@ body {
 
 .icon-link {
     color: var(--gray);
-    font-size: 1.5rem; /* Large icons */
+    font-size: 1.4rem;
     transition: all 0.3s ease;
 }
 
 .icon-link:hover {
     color: var(--fg);
-    transform: translateY(-3px); /* Pop up effect */
+    transform: translateY(-3px);
 }
 
 /* Profile Header */
 .profile-header {
     display: flex;
     gap: 2.5rem;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 2rem;
 }
 
 .avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 15px; /* Modern soft square */
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
     object-fit: cover;
-    /* Removed filter: grayscale(100%) so it is colored */
     border: 2px solid var(--border);
     transition: transform 0.3s ease;
 }
 
 .avatar:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .profile-right {
@@ -118,20 +115,21 @@ body {
 .name {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     letter-spacing: -1px;
+    line-height: 1.1;
 }
 
 .summary {
     color: var(--gray);
-    font-size: 1.05rem;
-    max-width: 500px;
+    font-size: 1rem;
     font-weight: 300;
+    line-height: 1.7;
 }
 
 .summary strong {
     color: var(--fg);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* Divider */
@@ -147,7 +145,7 @@ body {
 }
 
 .section-title {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--gray);
@@ -163,7 +161,8 @@ body {
 .skill-group h3 {
     font-size: 1rem;
     margin-bottom: 1rem;
-    font-weight: 600;
+    font-weight: 500;
+    color: var(--fg);
 }
 
 .tags {
@@ -175,8 +174,8 @@ body {
 .tag {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
-    padding: 8px 16px;
-    border-radius: 9999px; /* Pill shape */
+    padding: 8px 18px;
+    border-radius: 9999px;
     font-size: 0.9rem;
     color: #d1d5db;
     transition: all 0.2s ease;
@@ -204,12 +203,13 @@ footer {
     color: var(--border);
     font-size: 0.8rem;
     margin-top: 5rem;
+    padding-bottom: 2rem;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 650px) {
     .profile-header {
         flex-direction: column;
+        align-items: center;
         text-align: center;
         gap: 1.5rem;
     }
