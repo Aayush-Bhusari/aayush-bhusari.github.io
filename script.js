@@ -3,11 +3,11 @@ const catContainer = document.getElementById('cat-container');
 const catImage = document.getElementById('cat-image');
 
 const cats = [
-    'assets/cat1.jpg',
-    'assets/cat2.jpg',
-    'assets/cat3.jpg',
-    'assets/cat4.jpg',
-    'assets/cat5.jpg'
+    'assets/cat1.jpeg',
+    'assets/cat2.jpeg',
+    'assets/cat3.jpeg',
+    'assets/cat4.jpeg',
+    'assets/cat5.jpeg'
 ];
 
 let lastIndex = -1;
