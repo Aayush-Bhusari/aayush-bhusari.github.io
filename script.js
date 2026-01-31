@@ -2,7 +2,6 @@ const catBtn = document.getElementById('cat-btn');
 const catContainer = document.getElementById('cat-container');
 const catImage = document.getElementById('cat-image');
 
-// List of cat images in your assets folder
 const cats = [
     'assets/cat1.jpg',
     'assets/cat2.jpg',
@@ -16,24 +15,29 @@ let lastIndex = -1;
 catBtn.addEventListener('click', () => {
     let randomIndex;
     
-    // Ensure we pick a different cat than the last one
+    // 1. Pick a new random index
     do {
         randomIndex = Math.floor(Math.random() * cats.length);
     } while (randomIndex === lastIndex);
     
     lastIndex = randomIndex;
 
-    // If it's the first click, show the container
-    if (catContainer.classList.contains('hidden')) {
+    // 2. Smooth Transition Logic
+    catContainer.style.opacity = '0'; // Hide current
+    
+    setTimeout(() => {
         catImage.src = cats[randomIndex];
-        catContainer.classList.remove('hidden');
-    } else {
-        // Fade out slightly then change image for a "shuffling" feel
-        catContainer.style.opacity = '0';
         
-        setTimeout(() => {
-            catImage.src = cats[randomIndex];
+        // 3. Wait for the image to actually load before showing it
+        catImage.onload = () => {
+            catContainer.classList.remove('hidden');
             catContainer.style.opacity = '1';
-        }, 300);
-    }
+        };
+
+        // Fallback for cached images
+        if(catImage.complete) {
+            catContainer.classList.remove('hidden');
+            catContainer.style.opacity = '1';
+        }
+    }, 200); 
 });
