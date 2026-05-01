@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aayush Bhusari | Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 </head>
 <body>
-    
+
     <div id="stars"></div>
     <div id="stars2"></div>
     <div id="stars3"></div>
@@ -38,9 +37,9 @@
             <div class="profile-right">
                 <h1 class="name">Aayush Bhusari</h1>
                 <p class="summary">
-                    Graduate student at <strong>UT Dallas</strong> passionate about data science and machine learning. 
-                    I specialize in building <strong>end-to-end ML pipelines</strong>, from data extraction and preprocessing to model development and deployment. 
-                    My expertise spans predictive modeling, deep learning, natural language processing, and statistical analysis using <strong>Python, scikit-learn</strong>, and modern data visualization tools. 
+                    Graduate student at <strong>UT Dallas</strong> passionate about data science and machine learning.
+                    I specialize in building <strong>end-to-end ML pipelines</strong>, from data extraction and preprocessing to model development and deployment.
+                    My expertise spans predictive modeling, deep learning, natural language processing, and statistical analysis using <strong>Python, scikit-learn</strong>, and modern data visualization tools.
                     I'm driven by transforming complex datasets into actionable insights and developing AI-powered solutions that solve real-world problems across finance, healthcare, and automation domains.
                 </p>
             </div>
@@ -48,10 +47,65 @@
 
         <hr class="divider">
 
+        <!-- ── CHESS SECTION ── -->
+        <section class="section" id="chess-section">
+            <h2 class="section-title">Chess Engine 🔥</h2>
+
+            <div class="chess-container">
+
+                <!-- Status row -->
+                <div class="chess-meta">
+                    <span class="chess-status" id="chessStatus"></span>
+                    <span class="chess-thinking" id="chessThinking">... thinking</span>
+                </div>
+
+                <!-- Board + overlays -->
+                <div class="chess-board-wrap">
+                    <div class="chess-grid" id="chessBoard"></div>
+
+                    <!-- Color picker — shown before each game -->
+                    <div class="chess-overlay show" id="chessPickerOverlay">
+                        <div class="chess-overlay-title">Choose your side</div>
+                        <div class="chess-picker-btns">
+                            <!-- White button: light cream background -->
+                            <button class="chess-side-btn chess-side-btn--white" onclick="chessStartGame('w')">
+                                <img class="chess-side-piece" src="https://lichess1.org/assets/piece/cburnett/wK.svg" alt="White King">
+                                <span>White</span>
+                            </button>
+                            <!-- Black button: dark brown background -->
+                            <button class="chess-side-btn chess-side-btn--black" onclick="chessStartGame('b')">
+                                <img class="chess-side-piece" src="https://lichess1.org/assets/piece/cburnett/bK.svg" alt="Black King">
+                                <span>Black</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Game over overlay -->
+                    <div class="chess-overlay" id="chessOverlay">
+                        <div class="chess-overlay-emoji" id="chessOverlayEmoji"></div>
+                        <div class="chess-overlay-title" id="chessOverlayTitle"></div>
+                        <div class="chess-overlay-sub" id="chessOverlaySub"></div>
+                        <div class="chess-overlay-btns">
+                            <button class="chess-btn" onclick="chessRematch()">Rematch</button>
+                            <button class="chess-btn chess-btn-ghost" onclick="chessPickSide()">Switch sides</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Move history + new game -->
+                <div class="chess-footer">
+                    <div class="chess-history" id="chessHistory"></div>
+                    <button class="chess-btn" onclick="chessPickSide()">New game</button>
+                </div>
+
+            </div>
+        </section>
+
+        <hr class="divider">
+
         <section class="section">
             <h2 class="section-title">Technical Expertise</h2>
             <div class="skills-wrapper">
-                
                 <div class="skill-group">
                     <h3>Languages</h3>
                     <div class="tags">
@@ -60,7 +114,6 @@
                         <span class="tag">C++</span>
                     </div>
                 </div>
-
                 <div class="skill-group">
                     <h3>Databases</h3>
                     <div class="tags">
@@ -68,7 +121,6 @@
                         <span class="tag">PostgreSQL</span>
                     </div>
                 </div>
-
                 <div class="skill-group">
                     <h3>Data & ML</h3>
                     <div class="tags">
@@ -79,7 +131,6 @@
                         <span class="tag">Matplotlib</span>
                     </div>
                 </div>
-
                 <div class="skill-group">
                     <h3>Tools</h3>
                     <div class="tags">
