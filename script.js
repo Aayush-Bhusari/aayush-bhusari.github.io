@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// CAT EASTER EGG (original, unchanged)
+// CAT EASTER EGG
 // ─────────────────────────────────────────────────────────────
 
 const catBtn       = document.getElementById('cat-btn');
@@ -33,6 +33,131 @@ catBtn.addEventListener('click', () => {
         }
     }, 200);
 });
+
+
+// ─────────────────────────────────────────────────────────────
+// PROJECTS — fetched from GitHub API
+//
+// To add a project to the portfolio:
+//   1. Go to the repo on GitHub
+//   2. Click the ⚙️ gear icon next to "About"
+//   3. Add the topic: portfolio
+//   4. Save — it will appear here automatically
+// ─────────────────────────────────────────────────────────────
+
+const GITHUB_USERNAME = 'Aayush-Bhusari';
+
+// Map GitHub language names to their official colors
+const LANG_COLORS = {
+    'Python':           '#3572A5',
+    'Jupyter Notebook': '#DA5B0B',
+    'HTML':             '#e34c26',
+    'JavaScript':       '#f1e05a',
+    'TypeScript':       '#3178c6',
+    'TSQL':             '#e38c00',
+    'CSS':              '#563d7c',
+    'Shell':            '#89e051',
+    'C++':              '#f34b7d',
+    'C':                '#555555',
+    'Java':             '#b07219',
+    'Rust':             '#dea584',
+    'Go':               '#00ADD8',
+    'Ruby':             '#701516',
+    'Swift':            '#F05138',
+    'Kotlin':           '#A97BFF',
+};
+
+// Derive a short tech tag list from repo topics + language
+function buildTags(repo) {
+    const topicExcludes = new Set(['portfolio']);
+    const tags = repo.topics
+        .filter(t => !topicExcludes.has(t))
+        .map(t => t.replace(/-/g, ' '))
+        .map(t => t.charAt(0).toUpperCase() + t.slice(1))
+        .slice(0, 3);
+
+    // If no topics at all, fall back to language
+    if (tags.length === 0 && repo.language) tags.push(repo.language);
+
+    return tags;
+}
+
+function renderProjects(repos) {
+    const grid = document.getElementById('projectsGrid');
+    grid.innerHTML = '';
+
+    if (repos.length === 0) {
+        grid.innerHTML = `
+            <div class="projects-error">
+                No projects tagged with <code>portfolio</code> yet.<br>
+                Add the topic to a repo on GitHub and it will appear here.
+            </div>`;
+        return;
+    }
+
+    repos.forEach(repo => {
+        const tags    = buildTags(repo);
+        const color   = LANG_COLORS[repo.language] || '#6b7280';
+        const desc    = repo.description || 'No description provided.';
+
+        const card = document.createElement('a');
+        card.className  = 'project-card';
+        card.href       = repo.html_url;
+        card.target     = '_blank';
+        card.rel        = 'noopener noreferrer';
+        card.setAttribute('aria-label', repo.name);
+
+        const tagsHTML = tags.map(t => `<span class="project-tag">${t}</span>`).join('');
+
+        const footerHTML = repo.language ? `
+            <div class="project-card-footer">
+                <span class="lang-dot" style="background: ${color};"></span>
+                <span class="lang-label">${repo.language}</span>
+            </div>` : '';
+
+        card.innerHTML = `
+            <div class="project-card-top">
+                <span class="project-name">${repo.name.replace(/-/g, ' ').replace(/_/g, ' ')}</span>
+                <i class="fa-brands fa-github project-gh-icon" aria-hidden="true"></i>
+            </div>
+            <p class="project-desc">${desc}</p>
+            ${tagsHTML.length ? `<div class="project-card-tags">${tagsHTML}</div>` : ''}
+            ${footerHTML}
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+async function loadProjects() {
+    const grid = document.getElementById('projectsGrid');
+
+    try {
+        const res = await fetch(
+            `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`,
+            { headers: { 'Accept': 'application/vnd.github.mercy-preview+json' } }
+        );
+
+        if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+
+        const repos = await res.json();
+
+        const portfolioRepos = repos.filter(r =>
+            Array.isArray(r.topics) && r.topics.includes('portfolio')
+        );
+
+        renderProjects(portfolioRepos);
+
+    } catch (err) {
+        console.error('Failed to load projects:', err);
+        grid.innerHTML = `
+            <div class="projects-error">
+                Couldn't load projects right now. Check back soon.
+            </div>`;
+    }
+}
+
+loadProjects();
 
 
 // ─────────────────────────────────────────────────────────────
@@ -230,14 +355,11 @@ function chessGetBestMove(game, depth = 3) {
 // UI LAYER
 // ─────────────────────────────────────────────────────────────
 
-// Lichess cburnett piece SVG URLs — proper rendered piece images
-// Format: https://lichess1.org/assets/piece/cburnett/{color}{Type}.svg
 function chessPieceImg(color, type) {
-    const letter = type.toUpperCase(); // p→P, n→N, etc.
+    const letter = type.toUpperCase();
     return `https://lichess1.org/assets/piece/cburnett/${color}${letter}.svg`;
 }
 
-// Game state
 let chessGame;
 let chessPlayerColor  = 'w';
 let chessSelected     = null;
@@ -245,7 +367,6 @@ let chessLegalTargets = [];
 let chessLastMove     = null;
 let chessMoveHistory  = [];
 
-// ── Called when player clicks White or Black button ───────────
 function chessStartGame(color) {
     chessPlayerColor  = color;
     chessGame         = new Chess();
@@ -264,7 +385,6 @@ function chessStartGame(color) {
     if (color === 'b') chessEngineMove();
 }
 
-// ── Show the color picker again ───────────────────────────────
 function chessPickSide() {
     document.getElementById('chessOverlay').classList.remove('show');
     document.getElementById('chessPickerOverlay').classList.add('show');
@@ -272,12 +392,10 @@ function chessPickSide() {
     chessSetStatus('');
 }
 
-// ── Rematch: same color, new game ─────────────────────────────
 function chessRematch() {
     chessStartGame(chessPlayerColor);
 }
 
-// ── Render the board ──────────────────────────────────────────
 function chessRenderBoard() {
     const grid = document.getElementById('chessBoard');
     grid.innerHTML = '';
@@ -319,7 +437,6 @@ function chessRenderBoard() {
                 cell.appendChild(lbl);
             }
 
-            // Render piece as an <img> using Lichess SVGs
             const piece = chessGame.get(sq);
             if (piece) {
                 const img = document.createElement('img');
@@ -336,7 +453,6 @@ function chessRenderBoard() {
     }
 }
 
-// ── Handle square click ───────────────────────────────────────
 function chessOnSquareClick(sq) {
     if (chessGame.turn() !== chessPlayerColor || chessGame.game_over()) return;
 
@@ -378,7 +494,6 @@ function chessOnSquareClick(sq) {
     chessRenderBoard();
 }
 
-// ── Engine makes its move ─────────────────────────────────────
 function chessEngineMove() {
     chessSetStatus('');
     document.getElementById('chessThinking').classList.add('show');
@@ -398,7 +513,6 @@ function chessEngineMove() {
     }, 80);
 }
 
-// ── Game over overlay ─────────────────────────────────────────
 function chessShowOverlay() {
     const emoji = document.getElementById('chessOverlayEmoji');
     const title = document.getElementById('chessOverlayTitle');
