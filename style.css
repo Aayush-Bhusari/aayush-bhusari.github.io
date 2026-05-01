@@ -164,14 +164,132 @@ body {
     cursor: default;
 }
 
-/* Projects */
-.empty-box {
-    border: 1px dashed var(--border);
+/* ── PROJECTS ── */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.project-card {
+    border: 1px solid var(--border);
     border-radius: 12px;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+}
+.project-card:hover {
+    border-color: #555;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.project-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.project-name {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--fg);
+    line-height: 1.35;
+    flex: 1;
+}
+
+.project-gh-icon {
+    color: #555;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+    margin-top: 1px;
+}
+.project-card:hover .project-gh-icon {
+    color: var(--gray);
+}
+
+.project-desc {
+    color: var(--gray);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    font-weight: 300;
+    flex: 1;
+}
+
+.project-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.project-tag {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    color: #9ca3af;
+}
+
+.project-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 0.1rem;
+}
+
+.lang-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.lang-label {
+    font-size: 0.72rem;
+    color: #6b7280;
+}
+
+/* Loading state */
+.projects-loading {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     padding: 4rem;
+}
+
+.projects-loading-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--border);
+    animation: dotPulse 1.2s ease-in-out infinite;
+}
+.projects-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.projects-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+    0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+    40%            { opacity: 1;   transform: scale(1); }
+}
+
+/* Error state */
+.projects-error {
+    grid-column: 1 / -1;
     text-align: center;
     color: var(--gray);
-    background: rgba(255,255,255,0.02);
+    font-size: 0.85rem;
+    padding: 4rem;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
 }
 
 /* Easter egg */
@@ -226,6 +344,7 @@ footer {
         gap: 1.5rem;
     }
     .top-nav { justify-content: center; }
+    .projects-grid { grid-template-columns: 1fr; }
 }
 
 
@@ -343,9 +462,6 @@ footer {
     to   { transform: scale(1);   opacity: 1; }
 }
 
-/* ── PIECE IMAGES ──
-   Pieces are <img> tags from Lichess SVG CDN.
-   No color tricks needed — the SVGs are already correct. */
 .chess-piece {
     width: 80%;
     height: 80%;
@@ -419,7 +535,6 @@ footer {
     margin-top: 4px;
 }
 
-/* Shared base */
 .chess-side-btn {
     display: flex;
     flex-direction: column;
@@ -439,7 +554,6 @@ footer {
     box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
-/* White button: cream, like the light squares */
 .chess-side-btn--white {
     background: #f0d9b5;
     border-color: #c8a97e;
@@ -450,7 +564,6 @@ footer {
     border-color: #a07840;
 }
 
-/* Black button: dark brown, like the dark squares */
 .chess-side-btn--black {
     background: #2e1f0f;
     border-color: #5a3e28;
@@ -461,7 +574,6 @@ footer {
     border-color: #8a6040;
 }
 
-/* Piece image inside picker buttons */
 .chess-side-piece {
     width: 52px;
     height: 52px;
