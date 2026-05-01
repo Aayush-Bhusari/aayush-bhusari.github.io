@@ -22,7 +22,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- STAR ANIMATION START --- */
+/* --- STAR ANIMATION --- */
 #stars, #stars2, #stars3 {
     position: fixed;
     top: 0;
@@ -51,9 +51,8 @@ body {
 
 @keyframes animStar {
     from { transform: translateY(0px); }
-    to { transform: translateY(-2000px); }
+    to   { transform: translateY(-2000px); }
 }
-/* --- STAR ANIMATION END --- */
 
 /* Layout */
 .layout {
@@ -63,7 +62,7 @@ body {
     position: relative;
 }
 
-/* Nav & Icons */
+/* Nav */
 .top-nav {
     display: flex;
     justify-content: flex-end;
@@ -71,23 +70,19 @@ body {
     padding-top: 1rem;
 }
 
-.social-links {
-    display: flex;
-    gap: 1.5rem;
-}
+.social-links { display: flex; gap: 1.5rem; }
 
 .icon-link {
     color: var(--gray);
     font-size: 1.4rem;
     transition: all 0.3s ease;
 }
-
 .icon-link:hover {
     color: var(--fg);
     transform: translateY(-3px);
 }
 
-/* Profile Header */
+/* Profile */
 .profile-header {
     display: flex;
     gap: 2.5rem;
@@ -103,14 +98,9 @@ body {
     border: 2px solid var(--border);
     transition: transform 0.3s ease;
 }
+.avatar:hover { transform: scale(1.02); }
 
-.avatar:hover {
-    transform: scale(1.02);
-}
-
-.profile-right {
-    flex: 1;
-}
+.profile-right { flex: 1; }
 
 .name {
     font-size: 2.5rem;
@@ -126,11 +116,7 @@ body {
     font-weight: 300;
     line-height: 1.7;
 }
-
-.summary strong {
-    color: var(--fg);
-    font-weight: 500;
-}
+.summary strong { color: var(--fg); font-weight: 500; }
 
 /* Divider */
 .divider {
@@ -139,10 +125,8 @@ body {
     margin: 3.5rem 0;
 }
 
-/* Skills */
-.section {
-    margin-bottom: 4rem;
-}
+/* Sections */
+.section { margin-bottom: 4rem; }
 
 .section-title {
     font-size: 0.85rem;
@@ -152,11 +136,8 @@ body {
     margin-bottom: 2rem;
 }
 
-.skills-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
+/* Skills */
+.skills-wrapper { display: flex; flex-direction: column; gap: 2rem; }
 
 .skill-group h3 {
     font-size: 1rem;
@@ -165,11 +146,7 @@ body {
     color: var(--fg);
 }
 
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-}
+.tags { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
 .tag {
     background: rgba(255, 255, 255, 0.05);
@@ -180,7 +157,6 @@ body {
     color: #d1d5db;
     transition: all 0.2s ease;
 }
-
 .tag:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: #fff;
@@ -188,7 +164,7 @@ body {
     cursor: default;
 }
 
-/* Projects Placeholder */
+/* Projects */
 .empty-box {
     border: 1px dashed var(--border);
     border-radius: 12px;
@@ -198,16 +174,13 @@ body {
     background: rgba(255,255,255,0.02);
 }
 
-/* --- EASTER EGG STYLES --- */
-.easter-egg {
-    text-align: center;
-    margin: 4rem 0 2rem 0;
-}
+/* Easter egg */
+.easter-egg { text-align: center; margin: 4rem 0 2rem 0; }
 
 #cat-btn {
     background: transparent;
     border: 1px solid var(--border);
-    color: #444; /* Low contrast so it stays a secret */
+    color: #444;
     padding: 6px 14px;
     border-radius: 6px;
     font-family: var(--font-stack);
@@ -215,11 +188,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
-#cat-btn:hover {
-    color: var(--gray);
-    border-color: var(--gray);
-}
+#cat-btn:hover { color: var(--gray); border-color: var(--gray); }
 
 #cat-container {
     margin-bottom: 1.5rem;
@@ -227,7 +196,6 @@ body {
     justify-content: center;
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
 #cat-container.hidden {
     opacity: 0;
     transform: translateY(20px);
@@ -235,7 +203,7 @@ body {
 }
 
 #cat-image {
-    width: 100px; /* Adjusted from 220px to 100px for a "small" look */
+    width: 100px;
     height: auto;
     border-radius: 8px;
     border: 1px solid var(--border);
@@ -257,8 +225,295 @@ footer {
         text-align: center;
         gap: 1.5rem;
     }
-    
-    .top-nav {
-        justify-content: center;
-    }
+    .top-nav { justify-content: center; }
+}
+
+
+/* ============================================================
+   CHESS SECTION
+   ============================================================ */
+
+.chess-subtitle {
+    color: var(--gray);
+    font-size: 0.88rem;
+    font-weight: 300;
+    margin-top: -1.4rem;
+    margin-bottom: 1.8rem;
+}
+
+.chess-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* Status row */
+.chess-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    min-height: 22px;
+}
+
+.chess-status {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+/* Thinking indicator */
+.chess-thinking {
+    display: none;
+    font-size: 0.8rem;
+    color: var(--gray);
+    font-style: italic;
+    animation: chessFade 1s ease-in-out infinite alternate;
+}
+.chess-thinking.show { display: block; }
+
+@keyframes chessFade {
+    from { opacity: 0.4; }
+    to   { opacity: 1; }
+}
+
+/* Board wrapper */
+.chess-board-wrap {
+    position: relative;
+    width: min(400px, 100%);
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+/* 8×8 grid */
+.chess-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 100%;
+    height: 100%;
+}
+
+/* Squares */
+.chess-sq {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+.chess-sq.light { background: #f0d9b5; }
+.chess-sq.dark  { background: #b58863; }
+
+.chess-sq.selected {
+    background: rgba(106, 168, 79, 0.65) !important;
+}
+
+.chess-sq.lastmove-sq {
+    background: rgba(205, 158, 60, 0.45) !important;
+}
+
+/* Legal move dots */
+.chess-sq.legal-dot::after {
+    content: '';
+    position: absolute;
+    width: 28%;
+    height: 28%;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.18);
+    pointer-events: none;
+    animation: chessPopIn 0.15s ease-out both;
+}
+.chess-sq.legal-capture::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 4px solid rgba(0,0,0,0.2);
+    pointer-events: none;
+    animation: chessPopIn 0.15s ease-out both;
+}
+@keyframes chessPopIn {
+    from { transform: scale(0.4); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+/* ── PIECE IMAGES ──
+   Pieces are <img> tags from Lichess SVG CDN.
+   No color tricks needed — the SVGs are already correct. */
+.chess-piece {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    pointer-events: none;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Coordinates */
+.chess-coord-rank,
+.chess-coord-file {
+    position: absolute;
+    font-size: 9px;
+    font-weight: 600;
+    pointer-events: none;
+    line-height: 1;
+    opacity: 0.75;
+}
+.chess-coord-rank { top: 2px; left: 3px; }
+.chess-coord-file { bottom: 2px; right: 3px; }
+.chess-sq.light .chess-coord-rank,
+.chess-sq.light .chess-coord-file { color: #b58863; }
+.chess-sq.dark  .chess-coord-rank,
+.chess-sq.dark  .chess-coord-file { color: #f0d9b5; }
+
+/* ── OVERLAYS ── */
+.chess-overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.85);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 10;
+    animation: chessOverlayIn 0.35s ease both;
+}
+.chess-overlay.show { display: flex; }
+
+@keyframes chessOverlayIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.chess-overlay-emoji {
+    font-size: 2.4rem;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.chess-overlay-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--fg);
+}
+
+.chess-overlay-sub {
+    font-size: 0.82rem;
+    color: var(--gray);
+    margin-bottom: 4px;
+}
+
+/* ── COLOR PICKER BUTTONS ── */
+.chess-picker-btns {
+    display: flex;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+/* Shared base */
+.chess-side-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 32px;
+    border-radius: 12px;
+    font-family: var(--font-stack);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.chess-side-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* White button: cream, like the light squares */
+.chess-side-btn--white {
+    background: #f0d9b5;
+    border-color: #c8a97e;
+    color: #2a1a0a;
+}
+.chess-side-btn--white:hover {
+    background: #f8e8cc;
+    border-color: #a07840;
+}
+
+/* Black button: dark brown, like the dark squares */
+.chess-side-btn--black {
+    background: #2e1f0f;
+    border-color: #5a3e28;
+    color: #e8d5b0;
+}
+.chess-side-btn--black:hover {
+    background: #3d2a14;
+    border-color: #8a6040;
+}
+
+/* Piece image inside picker buttons */
+.chess-side-piece {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* ── GAME OVER OVERLAY BUTTONS ── */
+.chess-overlay-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.chess-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    padding: 8px 22px;
+    border-radius: 9999px;
+    font-family: var(--font-stack);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+.chess-btn:hover {
+    border-color: var(--fg);
+    color: var(--fg);
+}
+.chess-btn-ghost { opacity: 0.6; }
+.chess-btn-ghost:hover { opacity: 1; }
+
+/* Footer row */
+.chess-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    gap: 1rem;
+    min-height: 28px;
+}
+
+.chess-history {
+    font-size: 11px;
+    color: var(--gray);
+    font-family: monospace;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex: 1;
+    opacity: 0.6;
 }
